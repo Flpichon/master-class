@@ -13,7 +13,7 @@ import Notifications from 'vue-notification'
 
 sync(store, router);
 Vue.use(Notifications)
-
+console.log('coucou');
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyCnoAK5hcneQxgYY0LJRgyb6t6PGXhMpSQ',
