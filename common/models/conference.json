@@ -18,10 +18,10 @@
   },
   "validations": [],
   "relations": {
-      "user": {
-        "type": "belongsTo",
-        "model": "user"
-      }
+    "user": {
+      "type": "belongsTo",
+      "model": "user"
+    }
   },
   "acls": [
     {

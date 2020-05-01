@@ -1,17 +1,12 @@
 {
   "db": {
-    "name": "db",
-    "connector": "memory"
-  },
-  "masterclass": {
     "host": "localhost",
-    "port": 27017,
-    "url": "mongodb://localhost:27017/masterclass",
-    "database": "masterclass",
+    "port": 3306,
+    "url": "",
+    "database": "master-class",
     "password": "",
-    "name": "masterclass",
-    "user": "",
-    "useNewUrlParser": true,
-    "connector": "mongodb"
+    "name": "db",
+    "user": "root",
+    "connector": "MySQL"
   }
 }

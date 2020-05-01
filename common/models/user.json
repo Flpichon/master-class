@@ -14,10 +14,6 @@
     "password": {
       "type": "string",
       "required": false
-    },
-    "apiKey": {
-      "type": "string",
-      "required": false
     }
   },
   "validations": [],
@@ -44,7 +40,6 @@
       "principalId": "$unauthenticated",
       "permission": "ALLOW",
       "property": [
-        "create",
         "login",
         "__destroyById__accessTokens",
         "__get__accessTokens",
@@ -54,21 +49,21 @@
       ]
     },
     {
-        "accessType": "*",
-        "principalType": "ROLE",
-        "principalId": "ADMIN",
-        "permission": "ALLOW",
-        "property": [
-          "create",
-          "login",
-          "__destroyById__accessTokens",
-          "__get__accessTokens",
-          "__findById__accessTokens",
-          "__get__userRoles",
-          "logout",
-          "isValidToken"
-        ]
-      },
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": [
+        "find",
+        "login",
+        "__destroyById__accessTokens",
+        "__get__accessTokens",
+        "__findById__accessTokens",
+        "__get__userRoles",
+        "logout",
+        "isValidToken"
+      ]
+    },
     {
       "accessType": "*",
       "principalType": "ROLE",
@@ -76,7 +71,6 @@
       "permission": "ALLOW",
       "property": [
         "logout",
-        "find",
         "__get__accessTokens",
         "__get__userRoles",
         "__findById__accessTokens",
@@ -90,7 +84,10 @@
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$unauthenticated",
-      "permission": "DENY"
+      "permission": "DENY",
+      "property": [
+        "create"
+      ]
     }
   ],
   "methods": {}

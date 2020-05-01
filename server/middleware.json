@@ -43,17 +43,20 @@
     }
   },
   "files": {
-    "loopback#static": [{
-      "name": "publicPath",
-      "paths": ["/"],
-      "params": "$!../client/dist"
-    },
-    {
-      "name": "vueRouter",
-      "paths": ["*"],
-      "params": "$!../client/dist/index.html",
-      "optional": true
-    }
+    "loopback#static": [
+      {
+        "paths": [
+          "/"
+        ],
+        "params": "$!../client/dist"
+      },
+      {
+        "paths": [
+          "*"
+        ],
+        "params": "$!../client/dist/index.html",
+        "optional": true
+      }
     ]
   },
   "final": {

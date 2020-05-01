@@ -14,7 +14,7 @@
     ]
   },
   "AccessToken": {
-    "dataSource": "masterclass",
+    "dataSource": "db",
     "public": true,
     "relations": {
       "user": {
@@ -25,22 +25,22 @@
     }
   },
   "ACL": {
-    "dataSource": "masterclass",
+    "dataSource": "db",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "masterclass",
+    "dataSource": "db",
     "public": false,
     "options": {
       "strictObjectIDCoercion": true
     }
   },
   "Role": {
-    "dataSource": "masterclass",
+    "dataSource": "db",
     "public": false
   },
   "user": {
-    "dataSource": "masterclass",
+    "dataSource": "db",
     "public": true,
     "options": {
       "remoting": {
@@ -61,7 +61,7 @@
     }
   },
   "document": {
-    "dataSource": "masterclass",
+    "dataSource": "db",
     "public": true,
     "options": {
       "remoting": {
@@ -73,12 +73,22 @@
     }
   },
   "userRole": {
-    "dataSource": "masterclass",
+    "dataSource": "db",
     "public": true
   },
-
   "conference": {
-    "dataSource": "masterclass",
+    "dataSource": "db",
     "public": true
+  },
+  "project": {
+    "dataSource": "db",
+    "public": true,
+    "options": {
+      "remoting": {
+        "sharedMethods": {
+          "prototype.__create__users": true
+        }
+      }
+    }
   }
 }
