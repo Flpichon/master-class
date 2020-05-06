@@ -52,12 +52,19 @@ export default new Vuex.Store({
         async logout({ commit }) {
             const userId = localStorage.getItem('userId');
             const token = localStorage.getItem('token');
+            console.log("logout -> token", token)
             delete axios.defaults.headers.common['Authorization'];
-            const isTokenValid = await axios({ url: `/api/users/${userId}/isValidToken/${token}`, method: 'GET' });
+            let isTokenValid;
+            try {
+                isTokenValid = await axios({ url: `/api/users/${userId}/isValidToken/${token}`, method: 'GET' });
+            } catch(e) {
+                isTokenValid = false;
+            }
             axios.defaults.headers.common['Authorization'] = token;
             return await new Promise((resolve, reject) => {
                 commit('logout');
-                if (isTokenValid.data.token) {
+                console.log(isTokenValid);
+                if (isTokenValid && isTokenValid.data.token) {
                     axios({ url: '/api/users/logout', method: 'POST' })
                         .then(() => {
                             localStorage.removeItem('token');
@@ -76,10 +83,16 @@ export default new Vuex.Store({
         async isTokenValid({ commit }) {
             const userId = localStorage.getItem('userId');
             const token = localStorage.getItem('token');
-            delete axios.defaults.headers.common['Authorization'];
-            const isTokenValid = await axios({ url: `/api/users/${userId}/isValidToken/${token}`, method: 'GET' });
+            let isTokenValid;
+            try {
+                delete axios.defaults.headers.common['Authorization'];
+                isTokenValid = await axios({ url: `/api/users/${userId}/isValidToken/${token}`, method: 'GET' });
+                isTokenValid = isTokenValid.data.token;
+            } catch(e) {
+                isTokenValid = false;
+            }
             axios.defaults.headers.common['Authorization'] = token;
-            return isTokenValid.data.token;
+            return isTokenValid;
         },
         async refreshToken({ commit }) {
             const userId = localStorage.getItem('userId');

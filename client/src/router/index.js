@@ -2,7 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
+import EditConference from '../views/EditConference'
+import Conference from '../views/Conference'
 import store from './../store'
+import axios from "axios"
 
 Vue.use(VueRouter)
 
@@ -33,7 +36,25 @@ const routes = [{
         meta: {
             requiresAuth: false
         }
+    },
+    {
+        path: '/conference/:conferenceId',
+        name: 'conférence',
+        component: Conference,
+        meta: {
+            requiresAuth: false
+        }
+    },
+    {
+        path: '/conference/:conferenceId/article/:articleId/edit',
+        name: 'article',
+        component: EditConference,
+        meta: {
+            requiresAuth: true,
+            requiresOwner: true
+        }
     }
+
 ]
 
 const router = new VueRouter({
@@ -55,6 +76,27 @@ router.beforeEach(async (to, from, next) => {
                 return;
             }
             await store.dispatch('refreshToken');
+            if (to.matched.some(record => record.meta.requiresOwner)) {
+                let conference;
+                try {
+                    conference = await axios({ url: `/api/conferences/${to.params.conferenceId}`, method: 'GET' });
+                    conference = conference.data;
+                } catch(e) {
+                    conference = false;
+                }
+                if (!conference) {
+                    next('/');
+                    return;
+                }
+                if (conference) {
+                    const isOwner = `${conference.userId}` === `${localStorage.getItem('userId')}`;
+                    if (!isOwner) {
+                        next('/');
+                        return;
+                    }
+                }
+                next();
+            }
             next();
             return;
         }

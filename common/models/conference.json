@@ -14,6 +14,13 @@
     "organisateurs": {
       "type": "array",
       "required": false
+    },
+    "theme": {
+      "type": "string",
+      "required": "false"
+    },
+    "date": {
+      "type": "date"
     }
   },
   "validations": [],
@@ -21,6 +28,10 @@
     "user": {
       "type": "belongsTo",
       "model": "user"
+    },
+    "articles": {
+      "type": "hasMany",
+      "model": "article"
     }
   },
   "acls": [
@@ -33,10 +44,26 @@
     {
       "accessType": "*",
       "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": [
+        "__get__conferences",
+        "find",
+        "__get__user",
+        "findById"
+      ]
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
       "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": [
-        "find"
+        "find",
+        "__get__conferences",
+        "__create__article",
+        "__get__articles",
+        "__findById__articles"
       ]
     },
     {

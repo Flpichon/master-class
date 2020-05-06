@@ -1,33 +1,5 @@
 <template>
-  <body class="parallax">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <nav class="navbar bg-light shadow">
-                    <h1 class="navbar-brand logoM" href="#">MasterClass 2020</h1>
-                    <ul class="nav nav-pills">
-                        <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle colordarkblue" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Conférences</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#one">one</a>
-                            <a class="dropdown-item" href="#two">two</a>
-                            <div role="separator" class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#three">three</a>
-                        </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle colordarkblue" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">reseaux sociaux</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#one">one</a>
-                            <a class="dropdown-item" href="#two">two</a>
-                            <div role="separator" class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#three">three</a>
-                        </div>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
         <div class="row justify-content-around">
             <div class="col m-3 colfix">
                 <h2 id="autotext" class="text-center m-5 animed">MasterClass 2020</h2>
@@ -86,7 +58,6 @@
             </div>
         </div>
     </div>
-  </body>
 </template>
 
 <script>
@@ -110,19 +81,6 @@ export default {
         }
         .bluecolor {
         background-color : #b7d0e8;
-        }
-        .parallax {
-        /* The image used */
-        background-image: url("../assets/voiture.jpg");
-
-        /* Set a specific height */
-        /* height: 500px; */
-
-        /* Create the parallax scrolling effect */
-        background-attachment: fixed;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
         }
         .animed{
             color : white;

@@ -25,6 +25,11 @@
     "conference": {
       "type": "hasOne",
       "model": "conference"
+    },
+    "project": {
+      "type": "hasOne",
+      "model": "project",
+      "foreignKey": "ownerId"
     }
   },
   "acls": [
@@ -45,7 +50,8 @@
         "__get__accessTokens",
         "__findById__accessTokens",
         "logout",
-        "isValidToken"
+        "isValidToken",
+        "__create__project"
       ]
     },
     {
@@ -61,7 +67,8 @@
         "__findById__accessTokens",
         "__get__userRoles",
         "logout",
-        "isValidToken"
+        "isValidToken",
+        "__create__project"
       ]
     },
     {
@@ -77,7 +84,8 @@
         "__destroyById__accessTokens",
         "isValidToken",
         "__create__userRoles",
-        "__create__conference"
+        "__create__conference",
+        "__get__conference"
       ]
     },
     {

@@ -1,35 +1,28 @@
 <template>
-<div class="container">
-<h1 class="form-heading">login Form</h1>
-<div class="login-form">
-<div class="main-div">
-    <div class="panel">
-   <h2>Connexion</h2>
-   <p>Entrez votre pseudonyme et votre mot de passe</p>
-   </div>
-    <form id="Login"
-    @submit="login"
-    >
-
-        <div class="form-group">
-
-
-            <input type="text" class="form-control" v-model="username" placeholder="Pseudo">
-
+  <div class="container">
+    <h1 class="form-heading"></h1>
+    <div class="login-form">
+      <div class="main-div">
+        <div class="panel">
+        <h2>Connexion</h2>
+        <p>Entrez votre pseudonyme et votre mot de passe</p>
         </div>
-
+        <form id="Login"
+        @submit="login"
+        >
         <div class="form-group">
-
-            <input type="password" v-model="password" class="form-control" placeholder="Mot de passe">
-
+        <input type="text" class="form-control" v-model="username" placeholder="Pseudo">
+        </div>
+        <div class="form-group">
+        <input type="password" v-model="password" class="form-control" placeholder="Mot de passe">
         </div>
         <div class="forgot">
-</div>
+        </div>
         <button type="submit" class="btn btn-primary">Connexion</button>
-
-    </form>
+        </form>
+      </div>
     </div>
-</div></div>
+  </div>
 </template>
 
 <script>
@@ -46,26 +39,23 @@ export default {
 
   methods: {
     submit () {
-      console.log(this)
     },
     clear () {
 
     },
     login () {
-      const username = this.username 
-      console.log("login -> username", username)
-      const password = this.password
-      console.log("login -> password", password)
+      const username = this.username;
+      const password = this.password;
       this.$store.dispatch('login', { username, password })
-      .then(() => this.$router.push('/'))
-      .catch(err => {
-        this.$notify({
-          type: 'error',
-          group: 'foo',
-          title: 'Echec de la connexion',
-          text: 'Votre identifiant et/ou votre mot de passe sont incorrects.'
+        .then(() => this.$router.push('/'))
+        .catch(err => {
+          this.$notify({
+            type: 'error',
+            group: 'foo',
+            title: 'Echec de la connexion',
+            text: 'Votre identifiant et/ou votre mot de passe sont incorrects.'
+          });
         });
-      });
     }
   },
 }
@@ -124,5 +114,9 @@ body#LoginForm{ background-image:url("https://hdwallsource.com/img/2014/9/blur-2
 }
 .back { text-align: left; margin-top:10px;}
 .back a {color: #444444; font-size: 13px;text-decoration: none;}
+
+.container-fluid {
+  height: 100%;
+}
 
 </style>

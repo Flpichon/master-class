@@ -11,7 +11,7 @@ module.exports = function(User) {
                     const hasAccessToken = await User.app.models.AccessToken.count();
                     if (hasAccessToken) {
                         return User.app.models.AccessToken.resolve(tokenId, (err, token) => {
-                            if (err) {
+                            if (err || (typeof token === 'undefined' && typeof token === 'undefined')) {
                                 resolve({token: false});
                             } else {
                                 resolve({token: true});

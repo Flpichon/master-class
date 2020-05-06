@@ -8,6 +8,7 @@
     ],
     "mixins": [
       "loopback/common/mixins",
+      "../node_modules/loopback-ds-timestamp-mixin",
       "loopback/server/mixins",
       "../common/mixins",
       "./mixins"
@@ -55,7 +56,8 @@
           "prototype.__get__userRoles": true,
           "prototype.__create__userRoles": true,
           "prototype.isValidToken": true,
-          "prototype.__create__conference": true
+          "prototype.__create__conference": true,
+          "prototype.__create__project": true
         }
       }
     }
@@ -90,5 +92,13 @@
         }
       }
     }
+  },
+  "container": {
+    "dataSource": "stockage",
+    "public": true
+  },
+  "article": {
+    "dataSource": "db",
+    "public": true
   }
 }

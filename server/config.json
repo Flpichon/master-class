@@ -10,7 +10,7 @@
       "xml": false
     },
     "sharedMethods": {
-      "*": false
+      "*": true
     },
     "json": {
       "strict": false,

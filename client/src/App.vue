@@ -2,11 +2,38 @@
   <div id="app">
     <v-app  id="inspire">
       <notifications group="foo" />
-      <div id="nav">
-        <router-link to="/">Home | </router-link>
-        <router-link to="/about">About</router-link><span v-if="isLoggedIn"> | <a @click="logout">Logout</a></span><span v-else> | <a to="/login">Login</a></span>
-      </div>
-      <router-view/>
+        <body class="parallax">
+          <div id="nav">
+            <div class="row">
+                <div class="col">
+                    <nav class="navbar bg-light fixed-top shadow">
+                    <router-link to="/"><h1 class="navbar-brand" >MasterClass 2020</h1></router-link>
+                        <ul class="nav nav-pills">
+                            <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle colordarkblue" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Conférences</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#one">one</a>
+                                <a class="dropdown-item" href="#two">two</a>
+                                <div role="separator" class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#three">three</a>
+                            </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle colordarkblue" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mon compte</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#one">Informations</a>
+                                <a class="dropdown-item" to="/about" href="#two">Ma conférence</a>
+                                <a v-if="isLoggedIn" class="dropdown-item" @click="logout">Déconnexion</a>
+                                <router-link v-else to="/login"><a class="dropdown-item">Connexion</a></router-link>
+                            </div>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+          </div>
+          <router-view/>
+        </body>
     </v-app>
   </div>
 </template>
@@ -36,6 +63,20 @@ export default {
   }
 </script>
 <style>
+.parallax {
+/* The image used */
+background-image: url("./assets/voiture.jpg");
+
+/* Set a specific height */
+/* height: 500px; */
+
+/* Create the parallax scrolling effect */
+background-attachment: fixed;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+height: 100%;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
