@@ -21,6 +21,10 @@
     },
     "date": {
       "type": "date"
+    },
+    "reseaux": {
+      "type":"array",
+      "required": false
     }
   },
   "validations": [],
@@ -50,7 +54,9 @@
         "__get__conferences",
         "find",
         "__get__user",
-        "findById"
+        "findById",
+        "__findById__articles",
+        "__get__articles"
       ]
     },
     {
@@ -61,9 +67,11 @@
       "property": [
         "find",
         "__get__conferences",
-        "__create__article",
+        "__create__articles",
         "__get__articles",
-        "__findById__articles"
+        "__findById__articles",
+        "__updateById__articles",
+        "__destroyById__articles"
       ]
     },
     {

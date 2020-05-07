@@ -11,11 +11,11 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
 import Notifications from 'vue-notification'
 import { VueEditor , Quill} from "vue2-editor"
+import 'moment'
 
 sync(store, router);
 Vue.use(Notifications)
 Vue.use(VueEditor);
-console.log('coucou');
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyCnoAK5hcneQxgYY0LJRgyb6t6PGXhMpSQ',

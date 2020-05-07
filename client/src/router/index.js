@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import EditConference from '../views/EditConference'
 import Conference from '../views/Conference'
+import ArticleDisplay from '../views/ArticleDisplay'
 import store from './../store'
 import axios from "axios"
 
@@ -52,6 +53,16 @@ const routes = [{
         meta: {
             requiresAuth: true,
             requiresOwner: true
+        }
+    },
+
+    {
+        path: '/conference/:conferenceId/article/:articleId/view',
+        name: 'article-view',
+        component: ArticleDisplay,
+        meta: {
+            requiresAuth: false,
+            requiresOwner: false
         }
     }
 

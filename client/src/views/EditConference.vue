@@ -5,7 +5,7 @@
         <label for="">Titre</label>
       </div>
       <div class="col-md-4">
-            <input v-model="article.titre" type="text">
+            <input v-model="article.title" type="text">
       </div>
     </div>
     <button @click="saveContent">button</button>
@@ -17,10 +17,7 @@
 import { VueEditor, Quill } from "vue2-editor";
 import axios from "axios";
 export default {
-  components: {
-    VueEditor
-  },
- 
+
   data() {
     return {
       conferenceId: '',
@@ -40,7 +37,7 @@ export default {
         } catch(e) {
           article = {}
         }
-        this.article = article
+        this.article = article.data;
       } else {
         this.article = {}
       }
@@ -57,7 +54,7 @@ export default {
         } catch(e) {
         article = {}
         }
-        this.article = article
+        this.article = article.data;
         } else {
         this.article = {}
       }
@@ -92,6 +89,27 @@ export default {
       const conferenceId = this.$route.params.conferenceId;
       console.log("conferenceId", conferenceId)
       console.log(this.article);
+      const method = this.article.id ? 'PUT' : 'POST';
+      const url = this.article.id
+        ? `/api/conferences/${conferenceId}/articles/${this.articleId}`
+        : `/api/conferences/${conferenceId}/articles`;
+      axios({
+        url,
+        method,
+        data: this.article
+      })
+        .then(article => {
+          this.$router.push(`/conference/${conferenceId}`);
+          this.$notify({
+            type: 'success',
+            group: 'foo',
+            title: 'Succès',
+            text: method === 'PUT' ? `L'article a bien été modifié.` : `L'article a bien été créé.`
+          });
+        })
+        .catch(error => {
+          console.log(error);
+        })
     }
   }
 };

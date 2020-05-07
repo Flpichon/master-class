@@ -8,41 +8,42 @@
         </div>
         <div v-if="isUserOwner" class="row">
           <div class="col-md-12">
-            <button type="button" class="btn btn-outline-light">Ajouter un article</button>
+            <button type="button" @click="newArticle" class="btn btn-outline-light">Ajouter un article</button>
           </div>
         </div>
         <div class="row">
             <div class="col-lg-8 col-md-12">
-                <div class="card m-3 shadow rounded bluecolor">
-                    <div class="card-body">
-                        <h5 class="card-title size25 colordarkblue">Exemple news</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">sous titre news</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="card-link">liens</a>
+                <div  v-for="article in articles" :key="article.id" class="card m-3 shadow rounded white">
+                    <div class="card-header bgcolor">
+                      <div class="row">
+                        <div class="col-md-10">
+                          <h5 class="card-title size25">{{article.title}}</h5>  
+                        </div>
+                        <div class="col-md-2 text-right">
+                          <a class="edit" @click="editArticle(article.id)">
+                            <span v-if="isUserOwner"><i class="fas fa-edit"></i></span>
+                          </a>
+                          <a class="delete" @click="deleteArticle(article.id)">
+                            <span v-if="isUserOwner"><i class="fas fa-trash-alt"></i></span>
+                          </a>
+                        </div>
+                      </div>
                     </div>
-                </div>
-                <div class="card m-3 shadow rounded bluecolor">
                     <div class="card-body">
-                        <h5 class="card-title size25 colordarkblue">Exemple news 2</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">sous titre news 2</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="card-link">liens</a>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                          Création :
+                          <span class="badge badge-pill badge-primary">
+                            {{article.formatedDateCreation}}
+                          </span>
+                          Modification :
+                          <span class="badge badge-pill badge-secondary">
+                            {{article.formatedDateModification}}
+                          </span>
+                        </h6>
+                        <p class="card-text" v-html="article.content">{{article.content}}</p>
                     </div>
-                </div>
-                <div class="card m-3 shadow rounded bluecolor">
-                    <div class="card-body">
-                        <h5 class="card-title size25 colordarkblue">Exemple news 3</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">sous titre news 3</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="card-link">liens</a>
-                    </div>
-                </div>
-                <div class="card m-3 shadow rounded bluecolor">
-                    <div class="card-body">
-                        <h5 class="card-title size25 colordarkblue">Exemple news 3</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">sous titre news 3</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="card-link">liens</a>
+                    <div class="card-footer text-muted bgcolor">
+                      <a href="#" class="card-link">Voir l'article</a>
                     </div>
                 </div>
             </div>
@@ -57,8 +58,6 @@
                             <a href="#" class="btn text-white m-1 col colorinstagram"><i class="fab fa-instagram fa-2x"></i> Instagram</a>
                         </div>
                         <GoogleMap/>
-                        <p class="card-text">Les 19 et 20 mai a efficom comedy club</p>
-                        <a href="#" class="card-link">liens</a>
                     </div>
                 </div>
             </div>
@@ -70,6 +69,7 @@
 // @ is an alias to /src
 import GoogleMap from '../components/GoogleMap'
 import axios from 'axios'
+import moment from 'moment'
 export default {
   name: 'Conference',
   components: {
@@ -78,7 +78,8 @@ export default {
   data:() => ({
       conferenceId: '',
       conference: {},
-      isUserOwner: false
+      isUserOwner: false,
+      articles: []
   }),
 
   computed: {
@@ -109,6 +110,44 @@ export default {
     async isOwnerOfConference() {
       const user = await this.getUserConnected();
       return this.conference.userId === user.id;
+    },
+
+    async getArticles() {
+      let articles = await axios({ url: `/api/conferences/${this.conferenceId}/articles`, method: 'GET' });
+      articles = articles.data;
+      return articles;
+    },
+
+    async setArticles() {
+      let articles = await this.getArticles();
+      articles = articles.map(article => {
+        article.formatedDateCreation = moment(String(article.createdAt)).format('MM/DD/YYYY à HH:mm');
+        article.formatedDateModification = moment(String(article.modifiedAt)).format('MM/DD/YYYY à HH:mm');
+        return article;
+      })
+      this.articles = articles;
+    },
+
+    newArticle() {
+      this.$router.push(`/conference/${this.conferenceId}/article/new/edit`);
+    },
+
+    editArticle(articleId) {
+      this.$router.push(`/conference/${this.conferenceId}/article/${articleId}/edit`);
+    },
+
+    async deleteArticle(articleId) {
+      const conf = confirm('Voulez vous vraiment supprimer cet article ?');
+      if (confirm) {
+        await axios({ url: `/api/conferences/${this.conferenceId}/articles/${articleId}`, method: 'DELETE' });
+        await this.setArticles();
+          this.$notify({
+          type: 'success',
+          group: 'foo',
+          title: 'Succès',
+          text: `L'article a bien été supprimé`
+        });
+      }
     }
   },
 
@@ -117,6 +156,7 @@ export default {
       this.conferenceId = this.$route.params.conferenceId;
       this.conference = await this.getConferenceById(this.conferenceId);
       this.isUserOwner = await this.isOwnerOfConference();
+      await this.setArticles();
     },
   },
 
@@ -124,6 +164,8 @@ export default {
     this.conferenceId = this.$route.params.conferenceId;
     this.conference = await this.getConferenceById(this.conferenceId);
     this.isUserOwner = await this.isOwnerOfConference();
+    await this.setArticles();
+    const date = moment(String("2020-05-07T10:25:55.000Z")).format('MM/DD/YYYY hh:mm')
   }
 }
 </script>
@@ -133,11 +175,17 @@ export default {
         height: 200px;  /* The height is 400 pixels */
         width: 100%;  /* The width is the width of the web page */
        }
+       .bgcolor {
+         background-color: #eaefff;
+       }
         .backcolor {
         background-color : #222222;    
         }
         .bluecolor {
         background-color : #b7d0e8;
+        }
+        .white {
+          background-color: white;
         }
         .animed{
             color : white;
@@ -180,5 +228,15 @@ export default {
             background: -webkit-linear-gradient(#f8f9fa, #373791);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+        .card-text {
+          max-height: 200px;
+          text-overflow: ellipsis;
+          overflow: hidden; 
+          /* white-space: nowrap; */
+        }
+        .delete {
+          color: red;
+          margin-left: 10px;
         }
 </style>

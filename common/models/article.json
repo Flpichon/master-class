@@ -21,6 +21,9 @@
     },
     "content": {
       "type": "string",
+      "mysql": {
+        "dataType": "LONGTEXT"
+      },
       "required": false
     }
   },

@@ -21,8 +21,8 @@
                             <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle colordarkblue" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mon compte</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#one">Informations</a>
-                                <a class="dropdown-item" to="/about" href="#two">Ma conférence</a>
+                                <a v-if="isLoggedIn" class="dropdown-item" href="#one">Informations</a>
+                                <a v-if="isLoggedIn" class="dropdown-item" to="/about" href="#two">Ma conférence</a>
                                 <a v-if="isLoggedIn" class="dropdown-item" @click="logout">Déconnexion</a>
                                 <router-link v-else to="/login"><a class="dropdown-item">Connexion</a></router-link>
                             </div>
@@ -39,10 +39,31 @@
 </template>
 <script>
 export default {
+    data() {
+      return {
+        isLoggedIn: false
+      };
+    },
     computed : {
-      isLoggedIn: function(){ return this.$store.getters.isLoggedIn}
+    },
+    watch: {
+        async $route(to, from) {
+          this.isLoggedIn = await this.isLogged();
+          if (!this.isLoggedIn) {
+            await this.$store.dispatch('logout');
+          }
+        }
+    },
+    async mounted() {
+      this.isLoggedIn = await this.isLogged();
+      if (!this.isLoggedIn) {
+          await this.$store.dispatch('logout');
+      }
     },
     methods: {
+      isLogged: async function() {
+        return await this.$store.dispatch('isTokenValid');
+      },
       logout: function () {
         this.$store.dispatch('logout')
         .then(() => {
