@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    <div class="row">
-      <div class="col-md-2">
-        <label for="">Titre</label>
+    <div class="row input-group">
+      <div class="col-md-1">
+        <label class="input-group-text" for="">Titre</label>
       </div>
       <div class="col-md-4">
-            <input v-model="article.title" type="text">
+            <input class="form-control" v-model="article.title" type="text">
       </div>
     </div>
-    <button @click="saveContent">button</button>
+    <button class="m-1 btn btn-primary" @click="saveContent">valider</button>
     <vue-editor id="editor" v-model="article.content" useCustomImageHandler @image-added="handleImageAdded"> </vue-editor>
   </div>
 </template>
@@ -17,7 +17,9 @@
 import { VueEditor, Quill } from "vue2-editor";
 import axios from "axios";
 export default {
-
+   components: {
+    VueEditor
+  },
   data() {
     return {
       conferenceId: '',

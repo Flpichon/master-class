@@ -51,7 +51,8 @@
         "__findById__accessTokens",
         "logout",
         "isValidToken",
-        "__create__project"
+        "__create__project",
+        "__get__conference"
       ]
     },
     {
@@ -86,6 +87,7 @@
         "__create__userRoles",
         "__create__conference",
         "__get__conference"
+
       ]
     },
     {

@@ -2,7 +2,7 @@
   <div id="app">
     <v-app  id="inspire">
       <notifications group="foo" />
-        <body class="parallax">
+        <body class="bg-light">
           <div id="nav">
             <div class="row">
                 <div class="col">
@@ -12,17 +12,14 @@
                             <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle colordarkblue" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Conférences</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#one">one</a>
-                                <a class="dropdown-item" href="#two">two</a>
-                                <div role="separator" class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#three">three</a>
+                                <a v-for="conference in conferences" :key="conference.id"  class="dropdown-item" @click="goToConference(conference.id)">{{conference.titre}}</a>
                             </div>
                             </li>
                             <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle colordarkblue" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mon compte</a>
                             <div class="dropdown-menu">
                                 <a v-if="isLoggedIn" class="dropdown-item" href="#one">Informations</a>
-                                <a v-if="isLoggedIn" class="dropdown-item" to="/about" href="#two">Ma conférence</a>
+                                <a v-if="isLoggedIn" class="dropdown-item" @click="redirectToOwnerConference">Ma conférence</a>
                                 <a v-if="isLoggedIn" class="dropdown-item" @click="logout">Déconnexion</a>
                                 <router-link v-else to="/login"><a class="dropdown-item">Connexion</a></router-link>
                             </div>
@@ -38,10 +35,12 @@
   </div>
 </template>
 <script>
+import Axios from 'axios';
 export default {
     data() {
       return {
-        isLoggedIn: false
+        isLoggedIn: false,
+        conferences: []
       };
     },
     computed : {
@@ -52,6 +51,7 @@ export default {
           if (!this.isLoggedIn) {
             await this.$store.dispatch('logout');
           }
+          await this.getConferences();
         }
     },
     async mounted() {
@@ -59,8 +59,22 @@ export default {
       if (!this.isLoggedIn) {
           await this.$store.dispatch('logout');
       }
+      await this.getConferences();
     },
     methods: {
+      goToConference(conferenceId) {
+        this.$router.push(`/conference/${conferenceId}`)
+      },
+      async redirectToOwnerConference() {
+        let conference = await Axios.get(`/api/users/${localStorage.getItem('userId')}/conference`);
+        conference = conference.data;
+        this.$router.push(`/conference/${conference.id}`);
+      },
+      async getConferences() {
+        let conferences = await Axios.get(`/api/projects/1/allConferences`);
+        conferences = conferences.data;
+        this.conferences = conferences;
+      },
       isLogged: async function() {
         return await this.$store.dispatch('isTokenValid');
       },
@@ -84,20 +98,7 @@ export default {
   }
 </script>
 <style>
-.parallax {
-/* The image used */
-background-image: url("./assets/voiture.jpg");
 
-/* Set a specific height */
-/* height: 500px; */
-
-/* Create the parallax scrolling effect */
-background-attachment: fixed;
-background-position: center;
-background-repeat: no-repeat;
-background-size: cover;
-height: 100%;
-}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -117,5 +118,8 @@ height: 100%;
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+body {
+  height: 100%;
 }
 </style>

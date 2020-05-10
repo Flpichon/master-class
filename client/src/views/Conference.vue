@@ -1,19 +1,19 @@
 <template>
     <div class="container-fluid">
         <div class="row justify-content-around">
-            <div class="col m-3 colfix">
+            <div class="parallax col m-3 colfix">
                 <h2 id="autotext" class="text-center m-5 animed">MasterClass 2020 : {{conference.titre}}</h2>
                 <h3 class="text-center m-4 date">Le {{conference.formatedDate}}</h3>
             </div>
         </div>
         <div v-if="isUserOwner" class="row">
           <div class="col-md-12">
-            <button type="button" @click="newArticle" class="btn btn-outline-light">Ajouter un article</button>
+            <button type="button" @click="newArticle" class="shadow btn btn-primary">Ajouter un article</button>
           </div>
         </div>
         <div class="row">
             <div class="col-lg-8 col-md-12">
-                <div  v-for="article in articles" :key="article.id" class="card m-3 shadow rounded white">
+                <div  v-for="article in articles" :key="article.id" class="card m-3 shadow-lg rounded white">
                     <div class="card-header bgcolor">
                       <div class="row">
                         <div class="col-md-10">
@@ -43,16 +43,16 @@
                         <p class="card-text" v-html="article.content">{{article.content}}</p>
                     </div>
                     <div class="card-footer text-muted bgcolor">
-                      <a href="#" class="card-link">Voir l'article</a>
+                      <a @click="viewArticle(article.id, article.conferenceId)" class="card-link">Voir l'article</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-12">
-                <div class="card m-3 shadow sticky-top">
+                <div class="card m-3 shadow-lg sticky-top">
                     <div class="card-body">
                         <h5 class="card-title text-center colordarkblue">Informations :</h5>
                         <div class="row" role="group">
-                            <a href="#" class="btn text-white m-1 col colorfacebook"><i class="fab fa-facebook-f fa-2x"></i> Facebook</a>
+                            <a :href="facebook" class="btn text-white m-1 col colorfacebook"><i class="fab fa-facebook-f fa-2x"></i> Facebook</a>
                             <a href="#" class="btn text-white m-1 col colortwitter"><i class="fab fa-twitter fa-2x"></i> Twitter</a>
                             <a href="#" class="btn text-white m-1 col colorlinkedin"><i class="fab fa-linkedin-in fa-2x"></i> Linkedin</a>
                             <a href="#" class="btn text-white m-1 col colorinstagram"><i class="fab fa-instagram fa-2x"></i> Instagram</a>
@@ -79,13 +79,21 @@ export default {
       conferenceId: '',
       conference: {},
       isUserOwner: false,
-      articles: []
+      articles: [],
+      facebook: "coucou",
+      twitter: "",
+      linkedin: "",
+      instagram: ""
   }),
 
   computed: {
   },
 
   methods: {
+    viewArticle(id, conferenceId) {
+      this.$router.push(`/conference/${conferenceId}/article/${id}/view`);
+    },
+
     async getConferenceById(conferenceId) {
       let conferences = await axios({ url: '/api/conferences', method: 'GET' })
       conferences = conferences.data;
@@ -96,6 +104,9 @@ export default {
       }
       let data = new Date(conference.date);
       conference.formatedDate = `${data.getDate()}-${data.getMonth() + 1}-${data.getUTCFullYear()}`
+      // conference.reseaux.forEach(reseau => {
+      //   this[reseau] = reseau;
+      // });
       return conference;
     },
     async getUserConnected() {
@@ -238,5 +249,18 @@ export default {
         .delete {
           color: red;
           margin-left: 10px;
+        }
+        .parallax {
+        /* The image used */
+        background-image: url("../assets/voiture.jpg");
+
+        /* Set a specific height */
+
+        /* Create the parallax scrolling effect */
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100%;
         }
 </style>

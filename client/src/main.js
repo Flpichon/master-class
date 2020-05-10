@@ -12,24 +12,28 @@ import '@fortawesome/fontawesome-free/js/all.js'
 import Notifications from 'vue-notification'
 import { VueEditor , Quill} from "vue2-editor"
 import 'moment'
+import axios from "axios";
 
-sync(store, router);
-Vue.use(Notifications)
-Vue.use(VueEditor);
-Vue.use(VueGoogleMaps, {
-  load: {
-    key: 'AIzaSyCnoAK5hcneQxgYY0LJRgyb6t6PGXhMpSQ',
-    libraries: 'places,drawing,visualization',
-  },
-  installComponents: true
-});
-
-Vue.config.productionTip = false;
-Vue.config.devtools = true
-
-new Vue({
-  vuetify,
-  store,
-  router,
-  render: h => h(App)
-}).$mount('#app')
+axios.get(`/api/projects/1/apiKey`)
+  .then(apikey => {
+    sync(store, router);
+    Vue.use(Notifications)
+    Vue.use(VueEditor);
+    Vue.use(VueGoogleMaps, {
+      load: {
+        key: apikey.data,
+        libraries: 'places,drawing,visualization',
+      },
+      installComponents: true
+    });
+    
+    Vue.config.productionTip = false;
+    Vue.config.devtools = true
+    
+    new Vue({
+      vuetify,
+      store,
+      router,
+      render: h => h(App)
+    }).$mount('#app')
+  });

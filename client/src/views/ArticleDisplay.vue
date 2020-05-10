@@ -1,8 +1,10 @@
 <template>
     <div class="container-fluid">
         <div class="row justify-content-center mt-5">
-            <div class="col-12 col-lg-10 bg-light rounded border border-light">
-                <h1 class="text-center mt-5 soulign">{{article.title}}</h1>
+            <div class="col-12 col-lg-10  rounded border shadow">
+              <div class="parallax">
+                  <h1 class="align-middle text-center p-5 animed soulign">{{article.title}}</h1>
+                </div>
                 <div class="row mt-5 mb-5">
                     <div class="col-6 text-left">
                         <h3>Le {{article.formatedDateCreation}}</h3>
@@ -90,5 +92,22 @@ export default {
 <style>
 .soulign {
     text-decoration: underline;
+}
+.parallax {
+/* The image used */
+background-image: url("../assets/voiture.jpg");
+
+/* Set a specific height */
+
+
+/* Create the parallax scrolling effect */
+background-attachment: fixed;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+}
+.animed{
+    color : white;
+    font-size: 60px !important;
 }
 </style>

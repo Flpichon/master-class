@@ -2,7 +2,7 @@
   <div class="container">
     <h1 class="form-heading"></h1>
     <div class="login-form">
-      <div class="main-div">
+      <div class="main-div shadow">
         <div class="panel">
         <h2>Connexion</h2>
         <p>Entrez votre pseudonyme et votre mot de passe</p>
@@ -38,15 +38,26 @@ export default {
   },
 
   methods: {
+    validateEmail(email) {
+    let re =  /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    return re.test(String(email).toLowerCase());
+    },
     submit () {
     },
     clear () {
 
     },
     login () {
-      const username = this.username;
-      const password = this.password;
-      this.$store.dispatch('login', { username, password })
+      let user = {};
+      let email = this.validateEmail(this.username) ? this.username : false;
+      if (email) {
+        user.email = this.username;
+        user.password = this.password
+      } else {
+        user.username = this.username;
+        user.password = this.password
+      }
+      this.$store.dispatch('login', user)
         .then(() => this.$router.push('/'))
         .catch(err => {
           this.$notify({
