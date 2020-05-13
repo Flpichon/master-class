@@ -103,7 +103,7 @@ export default new Vuex.Store({
         async refreshToken({ commit }) {
             const userId = localStorage.getItem('userId');
             const token = localStorage.getItem('token');
-            return await axios({ url: `/api/users/${userId}/accessTokens/${token}`, method: 'GET' });
+            return await axios({ url: `/api/users/${userId}/accesstokens/${token}`, method: 'GET' });
         }
     },
     modules: {},
