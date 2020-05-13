@@ -1,0 +1,15 @@
+{
+  "name": "rolemapping",
+  "plural": "rolemappings",
+  "base": "RoleMapping",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "strictObjectIDCoercion": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

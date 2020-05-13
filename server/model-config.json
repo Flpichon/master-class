@@ -16,14 +16,7 @@
   },
   "accesstoken": {
     "dataSource": "db",
-    "public": true,
-    "relations": {
-      "user": {
-        "type": "belongsTo",
-        "model": "user",
-        "foreignKey": "userId"
-      }
-    }
+    "public": true
   },
   "acl": {
     "dataSource": "db",
@@ -31,10 +24,7 @@
   },
   "rolemapping": {
     "dataSource": "db",
-    "public": false,
-    "options": {
-      "strictObjectIDCoercion": true
-    }
+    "public": false
   },
   "role": {
     "dataSource": "db",

@@ -23,7 +23,7 @@
       "type": "date"
     },
     "reseaux": {
-      "type":"array",
+      "type": "array",
       "required": false
     }
   },

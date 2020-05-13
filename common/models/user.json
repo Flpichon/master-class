@@ -87,7 +87,6 @@
         "__create__userRoles",
         "__create__conference",
         "__get__conference"
-
       ]
     },
     {

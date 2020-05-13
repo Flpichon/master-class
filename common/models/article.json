@@ -21,10 +21,10 @@
     },
     "content": {
       "type": "string",
+      "required": false,
       "mysql": {
         "dataType": "LONGTEXT"
-      },
-      "required": false
+      }
     }
   },
   "validations": [],

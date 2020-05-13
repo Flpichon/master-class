@@ -1,0 +1,14 @@
+{
+  "name": "acl",
+  "plural": "acls",
+  "base": "ACL",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
