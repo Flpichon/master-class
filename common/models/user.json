@@ -66,7 +66,7 @@
         "__destroyById__accesstokens",
         "__get__accesstokens",
         "__findById__accesstokens",
-        "__get__userRoles",
+        "__get__userroles",
         "logout",
         "isValidToken",
         "__create__project"
@@ -80,11 +80,11 @@
       "property": [
         "logout",
         "__get__accesstokens",
-        "__get__userRoles",
+        "__get__userroles",
         "__findById__accesstokens",
         "__destroyById__accesstokens",
         "isValidToken",
-        "__create__userRoles",
+        "__create__userroles",
         "__create__conference",
         "__get__conference"
       ]
