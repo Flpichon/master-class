@@ -64,7 +64,7 @@
       }
     }
   },
-  "userole": {
+  "userrole": {
     "dataSource": "db",
     "public": true
   },
