@@ -5,7 +5,7 @@ module.exports = function(app) {
             if (typeof ctx.args.options !== 'undefined') {
                 if (typeof ctx.args.options.accessToken !== 'undefined' && ctx.args.options.accessToken !== null) {
                     const tokenId = ctx.args.options.accessToken.id;
-                    app.models.AccessToken.resolve(tokenId, (err, token) => {
+                    app.models.accesstoken.resolve(tokenId, (err, token) => {
                         if (!err && token) {
                             token.created = new Date();
                             token.ttl = 900;
