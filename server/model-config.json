@@ -14,7 +14,7 @@
       "./mixins"
     ]
   },
-  "AccessToken": {
+  "accesstoken": {
     "dataSource": "db",
     "public": true,
     "relations": {
@@ -25,18 +25,18 @@
       }
     }
   },
-  "ACL": {
+  "acl": {
     "dataSource": "db",
     "public": false
   },
-  "RoleMapping": {
+  "rolemapping": {
     "dataSource": "db",
     "public": false,
     "options": {
       "strictObjectIDCoercion": true
     }
   },
-  "Role": {
+  "role": {
     "dataSource": "db",
     "public": false
   },
@@ -74,7 +74,7 @@
       }
     }
   },
-  "userRole": {
+  "userole": {
     "dataSource": "db",
     "public": true
   },

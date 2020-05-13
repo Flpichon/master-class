@@ -18,9 +18,9 @@
   },
   "validations": [],
   "relations": {
-    "userRoles": {
+    "userroles": {
       "type": "hasMany",
-      "model": "userRole"
+      "model": "userrole"
     },
     "conference": {
       "type": "hasOne",

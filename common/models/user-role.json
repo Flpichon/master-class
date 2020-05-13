@@ -1,6 +1,6 @@
 {
-  "name": "userRole",
-  "plural": "userRoles",
+  "name": "userrole",
+  "plural": "userroles",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {

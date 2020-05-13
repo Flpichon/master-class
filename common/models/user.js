@@ -8,9 +8,9 @@ module.exports = function(User) {
 
     User.prototype.isValidToken = async function(tokenId) {
 				return new Promise( async (resolve, reject) => {
-                    const hasAccessToken = await User.app.models.AccessToken.count();
+                    const hasAccessToken = await User.app.models.accesstoken.count();
                     if (hasAccessToken) {
-                        return User.app.models.AccessToken.resolve(tokenId, (err, token) => {
+                        return User.app.models.accesstoken.resolve(tokenId, (err, token) => {
                             if (err || (typeof token === 'undefined' && typeof token === 'undefined')) {
                                 resolve({token: false});
                             } else {
