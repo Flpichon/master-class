@@ -20,7 +20,7 @@ app.start = function() {
 // Sub-apps like REST API are mounted via boot scripts.
 boot(app, __dirname, function(err) {
     if (err) throw err;
-
+    console.log('coucou');
     // start the server if `$ node server.js`
     if (require.main === module || GLOBAL.PhusionPassenger)
         app.start();
