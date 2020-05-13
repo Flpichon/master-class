@@ -1,13 +1,13 @@
 {
   "db": {
-    "host": "localhost",
+    "host": "masterofirefrost.mysql.db",
     "port": 3306,
     "url": "",
-    "database": "master-class",
-    "password": "",
+    "database": "masterofirefrost",
+    "password": "Askelar1412",
     "name": "db",
-    "user": "root",
-    "connector": "MySQL"
+    "user": "masterofirefrost",
+    "connector": "mysql"
   },
   "stockage": {
     "name": "stockage",
