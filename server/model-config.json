@@ -14,6 +14,10 @@
       "./mixins"
     ]
   },
+  "AccessToken": {
+    "dataSource": "adnexux",
+    "public": false
+  },
   "accesstoken": {
     "dataSource": "db",
     "public": true

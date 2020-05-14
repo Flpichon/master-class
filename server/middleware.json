@@ -32,7 +32,9 @@
   },
   "session": {},
   "auth": {
-    "loopback#token": {}
+    "loopback#token": { "params": {
+      "model": "accesstoken"
+    }}
   },
   "parse": {},
   "routes": {
