@@ -1,28 +1,22 @@
 <template>
-  <div class="container-fluid">
-    <h1 class="form-heading"></h1>
-    <div class="login-form">
-      <div class="main-div shadow">
-        <div class="panel">
-        <h2>Connexion</h2>
-        <p>Entrez votre pseudonyme et votre mot de passe</p>
+  <div class="container login-container">
+    <div class="row">
+        <div class="col-md-6 login-form-1">
+            <h3>Se connecter</h3>
+            <form         @submit="login">
+                <div class="form-group">
+                    <input type="text" class="form-control"  v-model="username" placeholder="Pseudo">
+                </div>
+                <div class="form-group">
+                    <input type="password" v-model="password" class="form-control" placeholder="Mot de passe">
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btnSubmit" value="Connexion" />
+                </div>
+            </form>
         </div>
-        <form id="Login"
-        @submit="login"
-        >
-        <div class="form-group">
-        <input type="text" class="form-control" v-model="username" placeholder="Pseudo">
-        </div>
-        <div class="form-group">
-        <input type="password" v-model="password" class="form-control" placeholder="Mot de passe">
-        </div>
-        <div class="forgot">
-        </div>
-        <button type="submit" class="btn btn-primary">Connexion</button>
-        </form>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -48,6 +42,7 @@ export default {
 
     },
     login () {
+      
       let user = {};
       let email = this.validateEmail(this.username) ? this.username : false;
       if (email) {
@@ -60,7 +55,6 @@ export default {
       this.$store.dispatch('login', user)
         .then(() => this.$router.push('/'))
         .catch(err => {
-          console.log('err', err);
           this.$notify({
             type: 'error',
             group: 'foo',
@@ -73,62 +67,58 @@ export default {
 }
 </script>
 <style scoped>
-body#LoginForm{ background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg"); background-repeat:no-repeat; background-position:center; background-size:cover; padding:10px;}
+.login-container{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+.login-form-1{
+    padding: 5%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+.login-form-1 h3{
+    text-align: center;
+    color: #333;
+}
+.login-form-2{
+    padding: 5%;
+    background: #0062cc;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+.login-form-2 h3{
+    text-align: center;
+    color: #fff;
+}
+.login-container form{
+    padding: 10%;
+}
+.btnSubmit
+{
+    width: 50%;
+    border-radius: 1rem;
+    padding: 1.5%;
+    border: none;
+    cursor: pointer;
+}
+.login-form-1 .btnSubmit{
+    font-weight: 600;
+    color: #fff;
+    background-color: #0062cc;
+}
+.login-form-2 .btnSubmit{
+    font-weight: 600;
+    color: #0062cc;
+    background-color: #fff;
+}
+.login-form-2 .ForgetPwd{
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+}
+.login-form-1 .ForgetPwd{
+    color: #0062cc;
+    font-weight: 600;
+    text-decoration: none;
+}
 
-.form-heading { color:#fff; font-size:23px;}
-.panel h2{ color:#444444; font-size:18px; margin:0 0 8px 0;}
-.panel p { color:#777777; font-size:14px; margin-bottom:30px; line-height:24px;}
-.login-form .form-control {
-  background: #f7f7f7 none repeat scroll 0 0;
-  border: 1px solid #d4d4d4;
-  border-radius: 4px;
-  font-size: 14px;
-  height: 50px;
-  line-height: 50px;
-}
-.main-div {
-  background: #ffffff none repeat scroll 0 0;
-  border-radius: 2px;
-  margin: 10px auto 30px;
-  max-width: 38%;
-  padding: 50px 70px 70px 71px;
-}
-
-.login-form .form-group {
-  margin-bottom:10px;
-}
-.login-form{ text-align:center;}
-.forgot a {
-  color: #777777;
-  font-size: 14px;
-  text-decoration: underline;
-}
-.login-form  .btn.btn-primary {
-  background: #f0ad4e none repeat scroll 0 0;
-  border-color: #f0ad4e;
-  color: #ffffff;
-  font-size: 14px;
-  width: 100%;
-  height: 50px;
-  line-height: 50px;
-  padding: 0;
-}
-.forgot {
-  text-align: left; margin-bottom:30px;
-}
-.botto-text {
-  color: #ffffff;
-  font-size: 14px;
-  margin: auto;
-}
-.login-form .btn.btn-primary.reset {
-  background: #ff9900 none repeat scroll 0 0;
-}
-.back { text-align: left; margin-top:10px;}
-.back a {color: #444444; font-size: 13px;text-decoration: none;}
-
-.container-fluid {
-  height: 100%;
-}
 
 </style>
