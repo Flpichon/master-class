@@ -3,8 +3,7 @@
 module.exports = function(User) {
 
     User.prototype.createAccessToken = function(ttl, cb) {
-        var userModel = this.constructor;
-        ttl = Math.min(ttl || userModel.settings.ttl, userModel.settings.maxTTL);
+        ttl = 900000;
         this.accesstoken.create({
           ttl: ttl
         }, cb);
