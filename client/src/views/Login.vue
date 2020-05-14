@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <h1 class="form-heading"></h1>
     <div class="login-form">
       <div class="main-div shadow">
