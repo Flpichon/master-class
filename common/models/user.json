@@ -18,6 +18,14 @@
   },
   "validations": [],
   "relations": {
+    "accesstokens": {
+      "type": "hasMany",
+      "model": "accesstoken",
+      "foreignKey": "userId",
+      "options": {
+        "disableInclude": true
+      }
+    },
     "userroles": {
       "type": "hasMany",
       "model": "userrole"
