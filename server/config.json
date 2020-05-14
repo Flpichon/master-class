@@ -1,7 +1,7 @@
 {
   "restApiRoot": "/api",
-  "host": "0.0.0.0",
-  "port": 3001,
+  "host": "masterofirefrost.mysql.db",
+  "port": 3306,
   "remoting": {
     "context": false,
     "rest": {
