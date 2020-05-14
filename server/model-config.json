@@ -15,7 +15,7 @@
     ]
   },
   "AccessToken": {
-    "dataSource": "adnexux",
+    "dataSource": "db",
     "public": false
   },
   "accesstoken": {
