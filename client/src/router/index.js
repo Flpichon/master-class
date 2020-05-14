@@ -86,7 +86,7 @@ router.beforeEach(async (to, from, next) => {
                     });
                 return;
             }
-            await store.dispatch('refreshToken');
+            //await store.dispatch('refreshToken');
             if (to.matched.some(record => record.meta.requiresOwner)) {
                 let conference;
                 try {

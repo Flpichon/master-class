@@ -13,6 +13,8 @@
     "name": "stockage",
     "connector": "loopback-component-storage",
     "provider": "filesystem",
-    "root": "/home/mastero/www/master-class/server/storage"
+    "root": "/home/mastero/www/master-class/server/storage",
+    "host": "masterofirefrost.mysql.db",
+    "port": 3306
   }
 }

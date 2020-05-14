@@ -8,7 +8,7 @@ module.exports = function(app) {
                     app.models.accesstoken.resolve(tokenId, (err, token) => {
                         if (!err && token) {
                             token.created = new Date();
-                            token.ttl = 900;
+                            token.ttl = 900000;
                             token.save(next);
                         }
                     });
