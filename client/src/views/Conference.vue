@@ -98,16 +98,15 @@ export default {
     async getConferenceById(conferenceId) {
       let conferences = await axios({ url: '/api/conferences', method: 'GET' })
       conferences = conferences.data;
-      conferences.forEach(conference => console.log(conference.id + conferenceId));
       let conference = conferences.find(conference => `${conference.id}` === conferenceId, '');
       if (!conference) {
         conference = conferences[0];
       }
       let data = new Date(conference.date);
       conference.formatedDate = `${data.getDate()}-${data.getMonth() + 1}-${data.getUTCFullYear()}`
-      // conference.reseaux.forEach(reseau => {
-      //   this[reseau] = reseau;
-      // });
+      conference.reseaux.forEach(reseau => {
+        console.log("getConferenceById -> reseau", reseau);
+      });
       return conference;
     },
     async getUserConnected() {
