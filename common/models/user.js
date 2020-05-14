@@ -1,6 +1,15 @@
 'use strict';
 
 module.exports = function(User) {
+
+    User.prototype.createAccessToken = function(ttl, cb) {
+        var userModel = this.constructor;
+        ttl = Math.min(ttl || userModel.settings.ttl, userModel.settings.maxTTL);
+        this.accesstoken.create({
+          ttl: ttl
+        }, cb);
+      };
+
     User.beforeRemote('login', (ctx, instance, next) => {
         ctx.req.body.ttl = 900000;
         next();
