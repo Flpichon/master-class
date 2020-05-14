@@ -2,12 +2,6 @@
 
 module.exports = function(User) {
 
-    User.prototype.createAccessToken = function(ttl, cb) {
-        ttl = 900000;
-        this.accesstoken.create({
-          ttl: ttl
-        }, cb);
-      };
 
     User.beforeRemote('login', (ctx, instance, next) => {
         ctx.req.body.ttl = 900000;
