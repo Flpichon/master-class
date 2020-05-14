@@ -60,6 +60,7 @@ export default {
       this.$store.dispatch('login', user)
         .then(() => this.$router.push('/'))
         .catch(err => {
+          console.log('err', err);
           this.$notify({
             type: 'error',
             group: 'foo',
