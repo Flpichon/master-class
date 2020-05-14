@@ -20,7 +20,7 @@
   },
   "accesstoken": {
     "dataSource": "db",
-    "public": true
+    "public": false
   },
   "acl": {
     "dataSource": "db",
