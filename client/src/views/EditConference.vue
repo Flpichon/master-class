@@ -87,10 +87,7 @@ export default {
     saveContent: function() {
       // You have the content to save
       this.article.authorId = localStorage.getItem('userId');
-      console.log(this.article.content);
       const conferenceId = this.$route.params.conferenceId;
-      console.log("conferenceId", conferenceId)
-      console.log(this.article);
       const method = this.article.id ? 'PUT' : 'POST';
       const url = this.article.id
         ? `/api/conferences/${conferenceId}/articles/${this.articleId}`

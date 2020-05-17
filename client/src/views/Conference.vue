@@ -53,9 +53,9 @@
                         <h5 class="card-title text-center colordarkblue">Informations :</h5>
                         <div class="row" role="group">
                             <a :href="facebook" class="btn text-white m-1 col colorfacebook"><i class="fab fa-facebook-f fa-2x"></i> Facebook</a>
-                            <a href="#" class="btn text-white m-1 col colortwitter"><i class="fab fa-twitter fa-2x"></i> Twitter</a>
-                            <a href="#" class="btn text-white m-1 col colorlinkedin"><i class="fab fa-linkedin-in fa-2x"></i> Linkedin</a>
-                            <a href="#" class="btn text-white m-1 col colorinstagram"><i class="fab fa-instagram fa-2x"></i> Instagram</a>
+                            <a :href="twitter" class="btn text-white m-1 col colortwitter"><i class="fab fa-twitter fa-2x"></i> Twitter</a>
+                            <a :href="linkedin" class="btn text-white m-1 col colorlinkedin"><i class="fab fa-linkedin-in fa-2x"></i> Linkedin</a>
+                            <a :href="instagram" class="btn text-white m-1 col colorinstagram"><i class="fab fa-instagram fa-2x"></i> Instagram</a>
                         </div>
                         <GoogleMap/>
                     </div>
@@ -80,7 +80,7 @@ export default {
       conference: {},
       isUserOwner: false,
       articles: [],
-      facebook: "coucou",
+      facebook: "",
       twitter: "",
       linkedin: "",
       instagram: ""
@@ -97,16 +97,20 @@ export default {
     async getConferenceById(conferenceId) {
       let conferences = await axios({ url: '/api/conferences', method: 'GET' })
       conferences = conferences.data;
-      conferences.forEach(conference => console.log(conference.id + conferenceId));
       let conference = conferences.find(conference => `${conference.id}` === conferenceId, '');
       if (!conference) {
         conference = conferences[0];
       }
       let data = new Date(conference.date);
       conference.formatedDate = `${data.getDate()}-${data.getMonth() + 1}-${data.getUTCFullYear()}`
-      // conference.reseaux.forEach(reseau => {
-      //   this[reseau] = reseau;
-      // });
+      if (conference.reseaux) {
+        conference.reseaux.forEach(reseau => {
+        const key = Object.keys(reseau);
+        const value = Object.values(reseau)
+        this[key] = value[0];
+        });
+      }
+      this.conferenceId = conference.id;
       return conference;
     },
     async getUserConnected() {

@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import EditConference from '../views/EditConference'
 import Conference from '../views/Conference'
 import ArticleDisplay from '../views/ArticleDisplay'
+import Information from '../views/Information'
 import store from './../store'
 import axios from "axios"
 
@@ -13,7 +14,7 @@ Vue.use(VueRouter)
 const routes = [{
         path: '/',
         name: 'home',
-        component: Home,
+        component: Conference,
         meta: {
             requiresAuth: false
         }
@@ -63,6 +64,15 @@ const routes = [{
         meta: {
             requiresAuth: false,
             requiresOwner: false
+        }
+    },
+
+    {
+        path: '/informations',
+        name: 'infos',
+        component: Information,
+        meta: {
+            requiresAuth: true
         }
     }
 
