@@ -63,6 +63,7 @@ export default {
     },
     methods: {
       goToInformations() {
+        console.log('yo');
         this.$router.push('/informations');
       },
       goToConference(conferenceId) {
