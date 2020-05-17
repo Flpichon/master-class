@@ -18,7 +18,7 @@
                             <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle colordarkblue" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mon compte</a>
                             <div class="dropdown-menu">
-                                <a v-if="isLoggedIn" class="dropdown-item" href="#one">Informations</a>
+                                <a v-if="isLoggedIn" class="dropdown-item" @click="goToInformations">Informations</a>
                                 <a v-if="isLoggedIn" class="dropdown-item" @click="redirectToOwnerConference">Ma conférence</a>
                                 <a v-if="isLoggedIn" class="dropdown-item" @click="logout">Déconnexion</a>
                                 <router-link v-else to="/login"><a class="dropdown-item">Connexion</a></router-link>
@@ -62,6 +62,9 @@ export default {
       await this.getConferences();
     },
     methods: {
+      goToInformations() {
+        this.$router.push('/informations');
+      },
       goToConference(conferenceId) {
         this.$router.push(`/conference/${conferenceId}`)
       },

@@ -2,8 +2,7 @@
     <div class="container-fluid">
         <div class="row justify-content-around">
             <div class="parallax col m-3 colfix">
-                <h2 id="autotext" class="text-center m-5 animed">MasterClass 2020</h2>
-                <h2 id="autotext" class="text-center m-5 animed">{{conference.titre}}</h2>
+                <h2 id="autotext" class="text-center m-5 animed">MasterClass 2020 : {{conference.titre}}</h2>
                 <h3 class="text-center m-4 date">Le {{conference.formatedDate}}</h3>
             </div>
         </div>
@@ -54,9 +53,9 @@
                         <h5 class="card-title text-center colordarkblue">Informations :</h5>
                         <div class="row" role="group">
                             <a :href="facebook" class="btn text-white m-1 col colorfacebook"><i class="fab fa-facebook-f fa-2x"></i> Facebook</a>
-                            <a href="#" class="btn text-white m-1 col colortwitter"><i class="fab fa-twitter fa-2x"></i> Twitter</a>
-                            <a href="#" class="btn text-white m-1 col colorlinkedin"><i class="fab fa-linkedin-in fa-2x"></i> Linkedin</a>
-                            <a href="#" class="btn text-white m-1 col colorinstagram"><i class="fab fa-instagram fa-2x"></i> Instagram</a>
+                            <a :href="twitter" class="btn text-white m-1 col colortwitter"><i class="fab fa-twitter fa-2x"></i> Twitter</a>
+                            <a :href="linkedin" class="btn text-white m-1 col colorlinkedin"><i class="fab fa-linkedin-in fa-2x"></i> Linkedin</a>
+                            <a :href="instagram" class="btn text-white m-1 col colorinstagram"><i class="fab fa-instagram fa-2x"></i> Instagram</a>
                         </div>
                         <GoogleMap/>
                     </div>
@@ -81,7 +80,7 @@ export default {
       conference: {},
       isUserOwner: false,
       articles: [],
-      facebook: "coucou",
+      facebook: "",
       twitter: "",
       linkedin: "",
       instagram: ""
@@ -104,9 +103,14 @@ export default {
       }
       let data = new Date(conference.date);
       conference.formatedDate = `${data.getDate()}-${data.getMonth() + 1}-${data.getUTCFullYear()}`
-      conference.reseaux.forEach(reseau => {
-        console.log("getConferenceById -> reseau", reseau);
-      });
+      if (conference.reseaux) {
+        conference.reseaux.forEach(reseau => {
+        const key = Object.keys(reseau);
+        const value = Object.values(reseau)
+        this[key] = value[0];
+        });
+      }
+      this.conferenceId = conference.id;
       return conference;
     },
     async getUserConnected() {
