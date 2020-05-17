@@ -204,7 +204,7 @@ export default {
         }
         .animed{
             color : white;
-            font-size: 60px !important;
+            font-size: 55px !important;
         }
         .date{
           color: white;

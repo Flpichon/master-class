@@ -108,6 +108,5 @@ background-size: cover;
 }
 .animed{
     color : white;
-    font-size: 60px !important;
 }
 </style>

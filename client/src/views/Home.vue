@@ -84,7 +84,6 @@ export default {
         }
         .animed{
             color : white;
-            font-size: 60px !important;
         }
         .colfix{
             min-height: 170px !important;
