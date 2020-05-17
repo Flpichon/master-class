@@ -2,8 +2,8 @@
     <div class="container-fluid">
         <div class="row justify-content-around">
             <div class="parallax col m-3 colfix">
-                <h3 class="text-center m-5 animed">MasterClass 2020</h3>
-                <h3 id="autotext" class="text-center m-5 animed">{{conference.titre}}</h3>
+                <h3 id="autotext" class="text-center animed">MasterClass 2020</h3>
+                <h2 class="text-center m-5 animed">{{conference.titre}}</h2>
                 <h3 class="text-center m-4 date">Le {{conference.formatedDate}}</h3>
             </div>
         </div>
@@ -205,7 +205,7 @@ export default {
         }
         .animed{
             color : white;
-            font-size: 55px !important;
+            font-size: 55px;
         }
         .date{
           color: white;
