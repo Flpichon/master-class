@@ -141,6 +141,7 @@ export default {
         article.formatedDateModification = moment(String(article.modifiedAt)).format('MM/DD/YYYY à HH:mm');
         return article;
       })
+      articles = articles.sort((a, b) => b.modifiedAt - a.modifiedAt);
       this.articles = articles;
     },
 
